@@ -5,7 +5,7 @@ WORKDIR /app
 COPY ./ReportingService /app
 RUN mvn package
 
-FROM openjdk:21-alpine
+FROM openjdk:21-jdk
 WORKDIR /app
 
 COPY --from=build /app/target/*.jar ReportingService-0.0.1.jar
