@@ -1,13 +1,42 @@
+common:
+  security:
+    enabled: false
+  feign-oauth:
+    enabled: false
+  mvc:
+    enabled: false
+server:
+  ssl:
+    enabled: false
+  servlet:
+    context-path: /badge-system
 spring:
+  security:
+    user:
+      name: user
+      password: 123
+  application:
+    name: cs544-202403-project
   datasource:
-    url: jdbc:mysql://localhost:3306/group3?useSSL=false&serverTimezone=UTC
-    username: root
-    password: 123456
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:sqlserver://cs544.cs.miu.edu:1433;databaseName=CS544-202403-Project;trustServerCertificate=true
+    username: cs544-202403
+    password: cs544-202403
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    hikari:
+      maximumPoolSize: 10
   jpa:
-    hibernate:
-      ddl-auto: create
     show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
+        dialect: org.hibernate.dialect.SQLServerDialect
+        
+logging:
+  level:
+    root: INFO
+  file:
+    name: /CS544/Logging/${spring.application.name}/logs
